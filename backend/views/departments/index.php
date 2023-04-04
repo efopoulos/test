@@ -5,9 +5,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /** @var yii\web\View $this */
-/** @var backend\models\DeparmentsSearch $searchModel */
+/** @var backend\models\DepartmentsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Departments';
@@ -22,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <?php Pjax::begin(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -33,8 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'branches_branch_id',
             'department_name',
             'companies_company_id',
-            'department_created_date',
-            //'department_status',
+            'department_status',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Departments $model, $key, $index, $column) {
@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+    <?php Pjax::end(); ?>
 
 
 </div>

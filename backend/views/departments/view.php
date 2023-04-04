@@ -33,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'branches_branch_id',
             'department_name',
             'companies_company_id',
-            'department_created_date',
             'department_status',
         ],
     ]) ?>

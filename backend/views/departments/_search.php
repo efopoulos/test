@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var backend\models\DeparmentsSearch $model */
+/** @var backend\models\DepartmentsSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
@@ -23,9 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'companies_company_id') ?>
 
-    <?= $form->field($model, 'department_created_date') ?>
-
-    <?php // echo $form->field($model, 'department_status') ?>
+    <?= $form->field($model, 'department_status') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

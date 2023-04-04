@@ -39,6 +39,10 @@ return [
                 ],
             ],
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['guess'],
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

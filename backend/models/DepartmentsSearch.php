@@ -7,9 +7,9 @@ use yii\data\ActiveDataProvider;
 use backend\models\Departments;
 
 /**
- * DeparmentsSearch represents the model behind the search form of `backend\models\Departments`.
+ * DepartmentsSearch represents the model behind the search form of `backend\models\Departments`.
  */
-class DeparmentsSearch extends Departments
+class DepartmentsSearch extends Departments
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class DeparmentsSearch extends Departments
     {
         return [
             [['department_id', 'branches_branch_id', 'companies_company_id'], 'integer'],
-            [['department_name', 'department_created_date', 'department_status'], 'safe'],
+            [['department_name', 'department_status'], 'safe'],
         ];
     }
 
@@ -61,7 +61,6 @@ class DeparmentsSearch extends Departments
             'department_id' => $this->department_id,
             'branches_branch_id' => $this->branches_branch_id,
             'companies_company_id' => $this->companies_company_id,
-            'department_created_date' => $this->department_created_date,
         ]);
 
         $query->andFilterWhere(['like', 'department_name', $this->department_name])

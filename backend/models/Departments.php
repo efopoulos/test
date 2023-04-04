@@ -11,7 +11,6 @@ use Yii;
  * @property int $branches_branch_id
  * @property string $department_name
  * @property int $companies_company_id
- * @property string $department_created_date
  * @property string $department_status
  *
  * @property Branches $branchesBranch
@@ -33,11 +32,11 @@ class Departments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['branches_branch_id', 'department_name', 'companies_company_id', 'department_created_date', 'department_status'], 'required'],
+            [['branches_branch_id', 'department_name', 'companies_company_id', 'department_status'], 'required'],
             [['branches_branch_id', 'companies_company_id'], 'integer'],
-            [['department_created_date'], 'safe'],
             [['department_status'], 'string'],
             [['department_name'], 'string', 'max' => 100],
+            [['department_name'], 'unique'],
             [['companies_company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::class, 'targetAttribute' => ['companies_company_id' => 'company_id']],
             [['branches_branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => Branches::class, 'targetAttribute' => ['branches_branch_id' => 'branch_id']],
         ];
@@ -50,10 +49,9 @@ class Departments extends \yii\db\ActiveRecord
     {
         return [
             'department_id' => 'Department ID',
-            'branches_branch_id' => 'Branches Branch ID',
+            'branches_branch_id' => 'Branch Name',
             'department_name' => 'Department Name',
-            'companies_company_id' => 'Companies Company ID',
-            'department_created_date' => 'Department Created Date',
+            'companies_company_id' => 'Company Name',
             'department_status' => 'Department Status',
         ];
     }

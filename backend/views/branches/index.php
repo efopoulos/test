@@ -33,8 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'companies_company_id',
             'branch_name',
             'branch_address',
-            'branch_created_date',
-            //'branch_status',
+            'branch_status',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Branches $model, $key, $index, $column) {

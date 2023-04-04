@@ -11,7 +11,6 @@ use Yii;
  * @property int $companies_company_id
  * @property string $branch_name
  * @property string $branch_address
- * @property string $branch_created_date
  * @property string $branch_status
  *
  * @property Companies $companiesCompany
@@ -33,12 +32,12 @@ class Branches extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['companies_company_id', 'branch_name', 'branch_address', 'branch_created_date', 'branch_status'], 'required'],
+            [['companies_company_id', 'branch_name', 'branch_address', 'branch_status'], 'required'],
             [['companies_company_id'], 'integer'],
-            [['branch_created_date'], 'safe'],
             [['branch_status'], 'string'],
             [['branch_name'], 'string', 'max' => 100],
             [['branch_address'], 'string', 'max' => 255],
+            [['branch_name'], 'unique'],
             [['companies_company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::class, 'targetAttribute' => ['companies_company_id' => 'company_id']],
         ];
     }
@@ -50,10 +49,9 @@ class Branches extends \yii\db\ActiveRecord
     {
         return [
             'branch_id' => 'Branch ID',
-            'companies_company_id' => 'Companies Company ID',
+            'companies_company_id' => 'Company Name',
             'branch_name' => 'Branch Name',
             'branch_address' => 'Branch Address',
-            'branch_created_date' => 'Branch Created Date',
             'branch_status' => 'Branch Status',
         ];
     }

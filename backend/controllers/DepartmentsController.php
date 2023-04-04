@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\Departments;
-use backend\models\DeparmentsSearch;
+use backend\models\DepartmentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -38,7 +38,7 @@ class DepartmentsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new DeparmentsSearch();
+        $searchModel = new DepartmentsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
