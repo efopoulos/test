@@ -12,6 +12,7 @@ use Yii;
  * @property string $department_name
  * @property int $companies_company_id
  * @property string $department_status
+ * @property string $department_created_date
  *
  * @property Branches $branchesBranch
  * @property Companies $companiesCompany

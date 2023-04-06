@@ -27,19 +27,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'branch_id',
-            'companies_company_id',
+            [
+                'attribute'=>'companies_company_id',
+                'value'=>'companiesCompany.company_name'
+            ],
             'branch_name',
             'branch_address',
-            'branch_status',
+            'branch_created_date',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Branches $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'branch_id' => $model->branch_id]);
                  }
             ],
+
         ],
     ]); ?>
 

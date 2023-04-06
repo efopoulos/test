@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\Departments;
 use backend\models\DepartmentsSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -67,20 +68,25 @@ class DepartmentsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Departments();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'department_id' => $model->department_id]);
+        if (Yii::$app->user->can('create-department')) {
+            $model = new Departments();
+            if ($this->request->isPost) {
+                $model->department_created_date = date('Y-m-d h-m-s');
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'department_id' => $model->department_id]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
+            throw ForbiddenHttpException;
+        }
     }
+
 
     /**
      * Updates an existing Departments model.
@@ -89,7 +95,8 @@ class DepartmentsController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($department_id)
+    public
+    function actionUpdate($department_id)
     {
         $model = $this->findModel($department_id);
 
@@ -109,7 +116,8 @@ class DepartmentsController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($department_id)
+    public
+    function actionDelete($department_id)
     {
         $this->findModel($department_id)->delete();
 
@@ -123,7 +131,8 @@ class DepartmentsController extends Controller
      * @return Departments the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($department_id)
+    protected
+    function findModel($department_id)
     {
         if (($model = Departments::findOne(['department_id' => $department_id])) !== null) {
             return $model;

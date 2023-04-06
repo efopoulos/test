@@ -73,6 +73,7 @@ class BranchesController extends Controller
             $model = new Branches();
 
             if ($this->request->isPost) {
+                $model->branch_created_date = date('Y-m-d h-m-s');
                 if ($model->load($this->request->post()) && $model->save()) {
                     return $this->redirect(['view', 'branch_id' => $model->branch_id]);
                 }
@@ -122,6 +123,27 @@ class BranchesController extends Controller
 
         return $this->redirect(['index']);
     }
+
+    public function actionLists($id)
+    {
+        $countBranches = Branches::find()
+            ->where(['companies_company_id' => $id])
+            ->count();
+
+        $branches = Branches::find()
+            ->where(['companies_company_id' => $id])
+            ->all();
+
+        if($countBranches > 0){
+            foreach ($branches as $branch) {
+                echo '<option value="'.$branch->branch_id.'">'. $branch->branch_name.'</option>';
+            }
+        }else{
+            echo "<option> - </option>";
+        }
+    }
+
+
 
     /**
      * Finds the Branches model based on its primary key value.

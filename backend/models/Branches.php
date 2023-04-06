@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $branch_id
  * @property int $companies_company_id
+ * @property string $branch_created_date
  * @property string $branch_name
  * @property string $branch_address
  * @property string $branch_status
